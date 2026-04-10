@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyas & Sharadhu — Engagement 💍</title>
+  <meta name="description" content="Join us in celebrating the engagement of Shreyas & Sharadhu on May 10, 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a060e;
+      --bg2: #120d18;
+      --gold: #E8C478;
+      --rose: #D4698A;
+      --champagne: #F2D9B0;
+      --light: #FFF5F0;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(232,196,120,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--champagne);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── Canvas for particles ── */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Sections ── */
+    section { position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,105,138,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 80%, rgba(232,196,120,0.08) 0%, transparent 50%);
+    }
+
+    .pre-title {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 12vw, 9rem);
+      background: linear-gradient(135deg, var(--champagne) 0%, var(--gold) 40%, var(--rose) 70%, var(--champagne) 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s ease-in-out infinite, fadeUp 1.2s ease 0.5s both;
+      line-height: 1.1;
+      filter: drop-shadow(0 0 40px rgba(212,105,138,0.3));
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .ampersand-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin: 0.5rem 0 2.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.8s forwards;
+    }
+
+    .ring-icon {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      animation: pulse 2.5s ease-in-out infinite, fadeUp 1s ease 1s both;
+    }
+
+    .date-badge {
+      display: inline-block;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      padding: 0.75rem 2.5rem;
+      border-radius: 100px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.2em;
+      color: var(--champagne);
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2.5s forwards;
+    }
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(232,196,120,0.5);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ── COUNTDOWN ── */
+    #countdown {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, transparent 0%, rgba(212,105,138,0.06) 50%, transparent 100%);
+    }
+
+    .section-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--champagne);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 1.5rem auto 3rem;
+    }
+
+    .timer-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .timer-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      min-width: 130px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .timer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(232,196,120,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .timer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(212,105,138,0.15);
+    }
+
+    .timer-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 4.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--champagne), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      display: block;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-top: 0.6rem;
+      display: block;
+    }
+
+    .engaged-message {
+      display: none;
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 2s infinite;
+    }
+
+    /* ── QUOTE / STORY ── */
+    #story {
+      padding: 6rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .quote-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12rem;
+      color: rgba(232,196,120,0.07);
+      position: absolute;
+      top: -2rem; left: 1rem;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--champagne);
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-author {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── DETAILS / CELEBRATION ── */
+    #details {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 100%, rgba(232,196,120,0.06) 0%, transparent 60%);
+    }
+
+    .details-cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .detail-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      min-width: 260px;
+      flex: 1;
+      max-width: 340px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .detail-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(232,196,120,0.1);
+    }
+
+    .detail-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .detail-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(242,217,176,0.75);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(232,196,120,0.08);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(242,217,176,0.3);
+      margin-top: 1rem;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .timer-card { padding: 1.5rem 1.8rem; min-width: 100px; }
+      .quote-card { padding: 2.5rem 1.5rem; }
+      .detail-card { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Particle Canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ══════ HERO ══════ -->
+<section id="hero">
+  <p class="pre-title">✦ An Engagement Invitation ✦</p>
+  <h1 class="names">Shreyas & Sharadhu</h1>
+  <p class="ampersand-line">Together Forever</p>
+  <div class="ring-icon">💍</div>
+  <div class="date-badge">Saturday, May 10, 2026 · 12:30 PM</div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════ COUNTDOWN ══════ -->
+<section id="countdown">
+  <p class="section-label reveal">The Big Day</p>
+  <h2 class="section-title reveal">Counting Down With Love</h2>
+  <div class="section-divider reveal"></div>
+
+  <div class="timer-grid" id="timer-grid">
+    <div class="timer-card reveal">
+      <span class="timer-number" id="days">00</span>
+      <span class="timer-label">Days</span>
+    </div>
+    <div class="timer-card reveal">
+      <span class="timer-number" id="hours">00</span>
+      <span class="timer-label">Hours</span>
+    </div>
+    <div class="timer-card reveal">
+      <span class="timer-number" id="minutes">00</span>
+      <span class="timer-label">Minutes</span>
+    </div>
+    <div class="timer-card reveal">
+      <span class="timer-number" id="seconds">00</span>
+      <span class="timer-label">Seconds</span>
+    </div>
+  </div>
+
+  <p class="engaged-message" id="engaged-msg">💍 We're Engaged! 💍</p>
+</section>
+
+<!-- ══════ QUOTE ══════ -->
+<section id="story">
+  <p class="section-label reveal">A Love Story</p>
+  <h2 class="section-title reveal">Written in the Stars</h2>
+  <div class="section-divider reveal"></div>
+
+  <div class="quote-card reveal">
+    <p class="quote-text">
+      "In all the world, there is no heart for me like yours.<br />
+      In all the world, there is no love for you like mine —<br />
+      and yet somehow, we found each other."
+    </p>
+    <p class="quote-author">— Shreyas & Sharadhu</p>
+  </div>
+</section>
+
+<!-- ══════ DETAILS ══════ -->
+<section id="details">
+  <p class="section-label reveal">Join Us</p>
+  <h2 class="section-title reveal">Celebration Details</h2>
+  <div class="section-divider reveal"></div>
+
+  <div class="details-cards">
+    <div class="detail-card reveal">
+      <span class="detail-icon">📅</span>
+      <h3 class="detail-title">The Date</h3>
+      <p class="detail-text">Saturday<br />May 10, 2026<br />12:30 PM IST</p>
+    </div>
+    <div class="detail-card reveal">
+      <span class="detail-icon">🌹</span>
+      <h3 class="detail-title">The Occasion</h3>
+      <p class="detail-text">With immense joy, we invite you to celebrate the engagement of<br /><strong style="color:var(--gold)">Shreyas & Sharadhu</strong></p>
+    </div>
+    <div class="detail-card reveal">
+      <span class="detail-icon">✨</span>
+      <h3 class="detail-title">The Promise</h3>
+      <p class="detail-text">A lifetime of laughter,<br />love, and adventure —<br />together, always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <p class="footer-names">Shreyas & Sharadhu</p>
+  <p class="footer-sub">Forever begins on May 10, 2026 · Made with ❤️</p>
+</footer>
+
+<script>
+  // ──── PARTICLES ────
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const SYMBOLS = ['✦', '❤', '✿', '♡', '✧', '⋆', '◇'];
+  const COLORS = ['rgba(232,196,120,', 'rgba(212,105,138,', 'rgba(242,217,176,'];
+
+  function createParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H * -1,
+      size: Math.random() * 12 + 6,
+      speedY: Math.random() * 0.6 + 0.2,
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.4 + 0.1,
+      symbol: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.01,
+    };
+  }
+
+  for (let i = 0; i < 60; i++) {
+    const p = createParticle();
+    p.y = Math.random() * H;
+    particles.push(p);
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.y += p.speedY;
+      p.x += p.speedX;
+      p.rotation += p.rotSpeed;
+      if (p.y > H + 20) {
+        particles[i] = createParticle();
+      }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.font = `${p.size}px serif`;
+      ctx.fillStyle = `${p.color}${p.opacity})`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.symbol, 0, 0);
+      ctx.restore();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // ──── COUNTDOWN ────
+  // Target: May 10, 2026 12:30 IST (UTC+5:30)
+  const target = new Date('2026-05-10T12:30:00+05:30').getTime();
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function updateTimer() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('timer-grid').style.display = 'none';
+      document.getElementById('engaged-msg').style.display = 'block';
+      return;
+    }
+
+    const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent    = pad(days);
+    document.getElementById('hours').textContent   = pad(hours);
+    document.getElementById('minutes').textContent = pad(minutes);
+    document.getElementById('seconds').textContent = pad(seconds);
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  // ──── SCROLL REVEAL ────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
