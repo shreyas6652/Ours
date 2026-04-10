@@ -603,57 +603,7 @@
       filter: invert(0.9) hue-rotate(185deg) saturate(0.7) brightness(0.85);
     }
 
-    /* ══ DRESS CODE ══ */
-    #dresscode {
-      padding: var(--section-pad);
-      text-align: center;
-    }
 
-    .dress-grid {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .dress-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      border-radius: 24px;
-      padding: 2.5rem 3rem;
-      flex: 1;
-      min-width: 220px;
-      max-width: 300px;
-      transition: transform 0.3s ease;
-    }
-
-    .dress-card:hover {
-      transform: translateY(-6px);
-    }
-
-    .dress-swatch {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin: 0 auto 1.2rem;
-      border: 3px solid var(--glass-border);
-      box-shadow: 0 0 24px currentColor;
-    }
-
-    .dress-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-
-    .dress-desc {
-      font-size: 0.88rem;
-      color: rgba(242, 217, 176, 0.65);
-    }
 
     /* ══ RSVP ══ */
     #rsvp {
@@ -698,6 +648,31 @@
       font-size: 0.82rem;
       color: rgba(242, 217, 176, 0.5);
       letter-spacing: 0.1em;
+    }
+
+    .gcal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 1.5rem;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, #4285F4, #34A853);
+      color: #fff;
+      border-radius: 100px;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 24px rgba(66,133,244,0.3);
+    }
+    .gcal-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(66,133,244,0.45);
+    }
+    .gcal-btn svg {
+      width: 18px; height: 18px; flex-shrink: 0;
     }
 
     /* ══ FOOTER ══ */
@@ -989,24 +964,7 @@
     </div>
   </section>
 
-  <!-- ══════ DRESS CODE ══════ -->
-  <section id="dresscode">
-    <p class="section-label reveal">Look the Part</p>
-    <h2 class="section-title reveal">Dress Code</h2>
-    <div class="section-divider reveal"></div>
-    <div class="dress-grid">
-      <div class="dress-card reveal">
-        <div class="dress-swatch" style="background:linear-gradient(135deg,#D4698A,#a84f68); color:#D4698A;"></div>
-        <h3 class="dress-title">Traditional Elegance</h3>
-        <p class="dress-desc">Sarees, Kurtas & ethnic wear warmly welcomed</p>
-      </div>
-      <div class="dress-card reveal">
-        <div class="dress-swatch" style="background:linear-gradient(135deg,#E8C478,#b89650); color:#E8C478;"></div>
-        <h3 class="dress-title">Colour Palette</h3>
-        <p class="dress-desc">Gold, Ivory, Rose & Earth tones encouraged</p>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ══════ RSVP ══════ -->
   <section id="rsvp">
@@ -1021,8 +979,15 @@
       <span class="rsvp-icon">💌</span>
       <p class="rsvp-text">Shreyas & Sharadhi</p>
       <p class="rsvp-sub">cordially invite you to their engagement</p>
-      <p style="margin-top:1rem; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold);">May 10,
-        2026 · 12:30 PM · Thirthahalli</p>
+      <p style="margin-top:1rem; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold);">May 10, 2026 · 12:30 PM · Thirthahalli</p>
+      <a class="gcal-btn"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Shreyas+%26+Sharadhi+Engagement+Ceremony&dates=20260510T070000Z%2F20260510T100000Z&details=Join+us+to+celebrate+the+engagement+of+Shreyas+%26+Sharadhi!+%F0%9F%92%8D&location=Nagarathna+Sabha+Bhavana%2C+Kuruvalli%2C+Thirthahalli%2C+Karnataka+577432"
+         target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+        </svg>
+        Add to Google Calendar
+      </a>
     </div>
   </section>
 
