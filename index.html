@@ -484,45 +484,140 @@
       align-items: start;
     }
 
-    @media (max-width: 700px) {
-      .venue-wrapper {
-        grid-template-columns: 1fr;
-      }
+    /* ══ HAMBURGER NAV ══ */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      color: var(--gold);
+      font-size: 1.3rem;
+      line-height: 1;
+      position: fixed;
+      top: 0.8rem;
+      right: 1.2rem;
+      z-index: 200;
+      backdrop-filter: blur(10px);
+      background: rgba(10,6,14,0.7);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
 
-      nav {
-        gap: 1.2rem;
-      }
+    /* ── 480px and below (small phones) ── */
+    @media (max-width: 480px) {
+      :root { --section-pad: 4rem 1.2rem; }
 
-      .tl-item,
-      .tl-item:nth-child(odd) {
+      /* Nav → hamburger */
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
         flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        padding: 5rem 2rem 2.5rem;
+        background: rgba(10,6,14,0.97);
+        backdrop-filter: blur(20px);
+        z-index: 150;
+        border-bottom: 1px solid var(--glass-border);
       }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.85rem; letter-spacing: 0.3em; }
 
-      .tl-item:nth-child(odd) .tl-content {
-        text-align: left;
-      }
+      /* Hero */
+      #hero { padding: 6rem 1.2rem 3rem; }
+      .names { font-size: clamp(3.2rem, 18vw, 5rem); }
+      .tagline { font-size: 0.9rem; letter-spacing: 0.35em; }
+      .date-badge { font-size: 0.9rem; padding: 0.7rem 1.4rem; text-align: center; }
+      .ring-wrap { font-size: 2rem; }
 
-      .timeline::before {
-        left: 20px;
-        transform: none;
-      }
+      /* Countdown */
+      .timer-grid { gap: 0.8rem; }
+      .timer-card { padding: 1.2rem 1.4rem; min-width: 70px; border-radius: 16px; }
+      .timer-number { font-size: clamp(2rem, 10vw, 2.8rem); }
+      .timer-label { font-size: 0.55rem; }
 
-      .tl-dot {
-        align-self: flex-start;
-      }
+      /* Quote */
+      .quote-card { padding: 2.5rem 1.2rem; border-radius: 20px; }
+      .quote-card::before { font-size: 8rem; }
+      .quote-text { font-size: 1.15rem; }
 
-      .quote-card {
-        padding: 2.5rem 1.5rem;
-      }
+      /* Details */
+      .details-cards { gap: 1rem; }
+      .detail-card { min-width: 100%; padding: 2rem 1.5rem; }
 
-      .detail-card {
-        min-width: 100%;
-      }
+      /* Timeline */
+      .timeline::before { left: 14px; transform: none; }
+      .tl-item, .tl-item:nth-child(odd) { flex-direction: row; align-items: flex-start; gap: 1rem; }
+      .tl-item:nth-child(odd) { flex-direction: row; }
+      .tl-item:nth-child(odd) .tl-content { text-align: left; }
+      .tl-dot { margin-top: 1.4rem; flex-shrink: 0; }
+      .tl-content { padding: 1.2rem 1.2rem; }
+      .tl-item > div[style] { display: none; }
 
-      .timer-card {
-        padding: 1.5rem 1.8rem;
-        min-width: 100px;
+      /* Venue */
+      .venue-wrapper { grid-template-columns: 1fr; }
+      .venue-info { padding: 2rem 1.5rem; }
+      .map-frame { height: 260px; border-radius: 18px; }
+      .venue-chips { gap: 0.4rem; }
+      .chip { font-size: 0.65rem; padding: 0.35rem 0.8rem; }
+      .directions-btn { width: 100%; justify-content: center; }
+
+      /* RSVP */
+      .rsvp-card { padding: 2rem 1.5rem; width: 100%; max-width: 100%; }
+      .gcal-btn { width: 100%; justify-content: center; font-size: 0.8rem; }
+      .rsvp-note { font-size: 1rem; }
+
+      /* Section headings */
+      .section-title { font-size: 1.8rem; }
+      .section-label { font-size: 0.62rem; }
+
+      /* Footer */
+      .footer-names { font-size: 2.8rem; }
+      .footer-sub { font-size: 0.6rem; letter-spacing: 0.2em; }
+    }
+
+    /* ── 481px–700px (large phones / small tablets) ── */
+    @media (min-width: 481px) and (max-width: 700px) {
+      :root { --section-pad: 5rem 1.5rem; }
+
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        padding: 5rem 2rem 2.5rem;
+        background: rgba(10,6,14,0.97);
+        backdrop-filter: blur(20px);
+        z-index: 150;
+        border-bottom: 1px solid var(--glass-border);
       }
+      .nav-links.open { display: flex; }
+
+      .timer-grid { gap: 1rem; }
+      .timer-card { min-width: 100px; padding: 1.6rem 2rem; }
+      .venue-wrapper { grid-template-columns: 1fr; }
+      .map-frame { height: 300px; }
+      .venue-info { padding: 2.5rem 2rem; }
+      .directions-btn { width: 100%; justify-content: center; }
+      .tl-item, .tl-item:nth-child(odd) { flex-direction: row; align-items: flex-start; }
+      .tl-item:nth-child(odd) { flex-direction: row; }
+      .tl-item:nth-child(odd) .tl-content { text-align: left; }
+      .timeline::before { left: 14px; transform: none; }
+      .tl-dot { margin-top: 1.4rem; flex-shrink: 0; }
+      .tl-item > div[style] { display: none; }
+      .detail-card { min-width: calc(50% - 0.9rem); }
+      .rsvp-card { padding: 2.5rem 2rem; }
+      .gcal-btn { width: 100%; justify-content: center; }
+      .quote-card { padding: 3rem 2rem; }
     }
 
     .venue-info {
